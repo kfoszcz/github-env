@@ -15,6 +15,7 @@ jobs:
     steps:
       - id: setenv
         run: |
+          ENVIRONMENT=develop
           [ ${{ github.ref }} == refs/heads/develop ] && ENVIRONMENT=develop
           [ ${{ github.ref }} == refs/heads/main ] && ENVIRONMENT=production
           echo "::set-output name=current_environment::${ENVIRONMENT}"
