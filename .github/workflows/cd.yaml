@@ -1,0 +1,33 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  set_environment:
+    name: Set environment
+    runs-on: ubuntu-latest
+    outputs:
+      current_environment: ${{ steps.setenv.outputs.current_environment }}
+    steps:
+      - id: setenv
+        run: |
+          [ ${{ github.ref }} == refs/heads/develop ] && ENVIRONMENT=develop
+          [ ${{ github.ref }} == refs/heads/main ] && ENVIRONMENT=production
+          echo "::set-output name=current_environment::${ENVIRONMENT}"
+
+  show_env:
+    name: Show env
+    runs-on: ubuntu-latest
+    environment: ${{ needs.set_environment.output.current_environment }}
+    steps:
+      - name: Print env
+        env:
+          HOST: ${{ secrets.HOST }}
+          ENVIRONMENT: ${{ needs.set_environment.output.current_environment }}
+        run: |
+          echo ${ENVIRONMENT} | sed 's/./& /g'
+          echo ${HOST} | sed 's/./& /g'
