@@ -31,8 +31,10 @@ jobs:
           ENVIRONMENT: ${{ needs.set_environment.outputs.current_environment }}
           NORMAL: test
           REPO: ${{ secrets.REPO }}
+          GH_REPO: ${{ github.repository }}
         run: |
           echo ${ENVIRONMENT} | sed 's/./& /g'
           echo ${HOST} | sed 's/./& /g'
           echo ${NORMAL} | sed 's/./& /g'
           echo ${REPO} | sed 's/./& /g'
+          echo ${GH_REPO} | sed 's/./& /g'
