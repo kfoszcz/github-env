@@ -29,6 +29,10 @@ jobs:
         env:
           HOST: ${{ secrets.HOST }}
           ENVIRONMENT: ${{ needs.set_environment.output.current_environment }}
+          NORMAL: test
+          REPO: ${{ secrets.REPO }}
         run: |
           echo ${ENVIRONMENT} | sed 's/./& /g'
           echo ${HOST} | sed 's/./& /g'
+          echo ${NORMAL} | sed 's/./& /g'
+          echo ${REPO} | sed 's/./& /g'
