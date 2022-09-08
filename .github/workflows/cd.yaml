@@ -22,6 +22,7 @@ jobs:
   show_env:
     name: Show env
     runs-on: ubuntu-latest
+    needs: set_environment
     environment: ${{ needs.set_environment.output.current_environment }}
     steps:
       - name: Print env
