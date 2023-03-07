@@ -17,15 +17,13 @@ jobs:
         run: |
           [ ${{ github.ref }} == refs/heads/develop ] && ENVIRONMENT=develop
           [ ${{ github.ref }} == refs/heads/main ] && ENVIRONMENT=production
-          echo "::set-output name=current_environment::${ENVIRONMENT}"
+          echo "current_environment=${ENVIRONMENT}" >> $GITHUB_OUTPUT
 
   show_env:
     name: Show env
     runs-on: ubuntu-latest
     needs: set_environment
-    environment:
-      name: ${{ needs.set_environment.outputs.current_environment }}
-      url: "https://google.pl"
+    environment: ${{ needs.set_environment.outputs.current_environment }}
     steps:
       - name: Print env
         env:
