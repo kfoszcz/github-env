@@ -25,7 +25,7 @@ jobs:
     needs: set_environment
     environment:
       name: ${{ needs.set_environment.outputs.current_environment }}
-      url: ${{ vars.ENVIRONMENT_URL }}
+      url: "https://google.pl"
     steps:
       - name: Print env
         env:
