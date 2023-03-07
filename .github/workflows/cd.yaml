@@ -23,8 +23,9 @@ jobs:
     name: Show env
     runs-on: ubuntu-latest
     needs: set_environment
-    environment: ${{ needs.set_environment.outputs.current_environment }}
-    environment_url: ${{ vars.ENVIRONMENT_URL }}
+    environment:
+      name: ${{ needs.set_environment.outputs.current_environment }}
+      url: ${{ vars.ENVIRONMENT_URL }}
     steps:
       - name: Print env
         env:
